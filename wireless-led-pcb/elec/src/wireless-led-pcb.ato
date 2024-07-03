@@ -1,0 +1,104 @@
+from "usb-connectors/usb-connectors.ato" import USBCConn
+from "esp32-s3/elec/src/esp32-s3.ato" import ESP32S3
+from "generics/resistors.ato" import Resistor
+
+component BatteryConnector:
+    signal vcc
+    signal gnd
+
+component BarrelJackConnector:
+    # just the component.
+    signal vcc
+    signal gnd
+    # detect signal is tied to gnd when not connected, and floats when connected.
+    signal detect
+
+module BarreJack:
+    # the component, but with a pullup resistor on detect.
+    signal vcc
+    signal gnd
+    signal detect
+
+    r_pullup = new Resistor
+    r_pullup.footprint = "R0603"
+    r_pullup.value = 100k +/- 20%
+
+    vcc ~ r_pullup.1
+    detect ~ r_pullup.2
+
+component LedStripConnector:
+    signal vcc
+    signal gnd
+    signal data
+
+module QualLevelShifter:
+    signal in1
+    signal in2
+    signal in3
+    signal in4
+    signal out1
+    signal out2
+    signal out3
+    signal out4
+    signal gnd
+    signal vcc
+
+module Button:
+    signal gnd
+    signal vcc
+    signal button
+
+module Boost3v7To5v:
+    signal vcc_in
+    signal vcc_out
+    signal gnd
+
+module BuckWideTo3v3:
+    signal vcc_in
+    signal vcc_out
+    signal gnd
+
+component Switch2P1T:
+    signal pole1_a
+    signal pole1_b
+    signal pole2_a
+    signal pole2_b
+
+module PowerSelector:
+    signal vcc_in_a
+    signal vcc_in_b
+    signal vcc_out
+    signal gnd
+    signal select_b
+
+module WirelessLedPcb:
+    usb_connetor = new USBCConn
+    mcu = new ESP32S3
+    level_shifter = new QualLevelShifter
+    button = new Button
+    battery_connector = new BatteryConnector
+    barrel_jack = new BarrelJack
+    led_strip_connector_1 = new LedStripConnector
+    led_strip_connector_2 = new LedStripConnector
+    led_strip_connector_3 = new LedStripConnector
+    led_strip_connector_4 = new LedStripConnector
+    power_switch = new Switch2P1T
+    boost_3v7_to_5v = new Boost3v7To5v
+    buck_wide_to_3v3 = new BuckWideTo3v3
+    power_selector = new PowerSelector
+
+    signal gnd
+    signal vcc_barrel
+    signal vcc_battery
+    signal vcc_3v3
+    signal vcc_led
+    signal vcc_5v
+    signal barrel_detect
+    signal led_data1
+    signal led_data2
+    signal led_data3
+    signal led_data4
+    signal led_data1_5v
+    signal led_data2_5v
+    signal led_data3_5v
+    signal led_data4_5v
