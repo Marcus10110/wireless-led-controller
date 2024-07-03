@@ -13,7 +13,7 @@ component BarrelJackConnector:
     # detect signal is tied to gnd when not connected, and floats when connected.
     signal detect
 
-module BarreJack:
+module BarrelJack:
     # the component, but with a pullup resistor on detect.
     signal vcc
     signal gnd
@@ -21,7 +21,7 @@ module BarreJack:
 
     r_pullup = new Resistor
     r_pullup.footprint = "R0603"
-    r_pullup.value = 100k +/- 20%
+    r_pullup.value = 100kohm +/- 20%
 
     vcc ~ r_pullup.1
     detect ~ r_pullup.2
