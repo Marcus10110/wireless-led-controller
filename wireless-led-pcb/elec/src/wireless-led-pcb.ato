@@ -29,6 +29,9 @@ component LedStripConnector:
     footprint = "TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal"
     power = new Power
     signal data
+    power.vcc ~ pin 1
+    power.gnd ~ pin 3
+    data ~ pin 2
 
 component SN74AHC125QPWRQ1:
     # https://www.digikey.com/en/products/detail/texas-instruments/SN74AHC125QPWRQ1/698088
@@ -189,9 +192,38 @@ module BuckWideTo3v3:
     l1.p2 ~ rfbt.p1
     l1.p2 ~ cout.p1
 
+component AP7375_50SA_7:
+    mpn = "AP7375-50SA-7"
+    footprint = "SOT-23-3"
+    signal gnd ~ pin 3
+    signal v_in ~ pin 1
+    signal v_out ~ pin 2
 
-module Ldo5V from Regulator:
+module Ldo5V:
+    power_in = new Power
+    power_out = new Power
+
+    ic = new AP7375_50SA_7
+    cin = new Capacitor
+    cout = new Capacitor
+
     signal gnd
+    power_in.vcc ~ ic.v_in
+    power_out.vcc ~ ic.v_out
+    gnd ~ ic.gnd
+    power_in.gnd ~ gnd
+    power_out.gnd ~ gnd
+    power_out.vcc ~ cout.p1
+    power_in.vcc ~ cin.p1
+    gnd ~ cin.p2
+    gnd ~ cout.p2
+    cin.footprint = "C0603"
+    cin.value = 1uF +/- 20%
+    cin.voltage = 50V +/- 20%
+    
+    cout.footprint = "C0805"
+    cout.value = 10uF +/- 20%
+    cout.voltage = 10V +/- 20%
 
 
 component Switch2P1T:
