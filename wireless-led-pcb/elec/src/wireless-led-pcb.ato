@@ -1,37 +1,24 @@
 from "usb-connectors/usb-connectors.ato" import USBCConn
 from "esp32-s3/elec/src/esp32-s3.ato" import ESP32S3
 from "generics/resistors.ato" import Resistor
+from "generics/mosfets.ato" import PFET
+from "generics/regulators.ato" import Regulator
+from "generics/interfaces.ato" import Power
 
 component BatteryConnector:
-    signal vcc
-    signal gnd
+    power = new Power
 
-component BarrelJackConnector:
-    # just the component.
-    signal vcc
-    signal gnd
+component BarrelJack:
+    power = new Power
     # detect signal is tied to gnd when not connected, and floats when connected.
     signal detect
 
-module BarrelJack:
-    # the component, but with a pullup resistor on detect.
-    signal vcc
-    signal gnd
-    signal detect
-
-    r_pullup = new Resistor
-    r_pullup.footprint = "R0603"
-    r_pullup.value = 100kohm +/- 20%
-
-    vcc ~ r_pullup.1
-    detect ~ r_pullup.2
-
 component LedStripConnector:
-    signal vcc
-    signal gnd
+    power = new Power
     signal data
 
 module QualLevelShifter:
+    power = new Power
     signal in1
     signal in2
     signal in3
@@ -40,23 +27,20 @@ module QualLevelShifter:
     signal out2
     signal out3
     signal out4
-    signal gnd
-    signal vcc
 
 module Button:
-    signal gnd
-    signal vcc
+    power = new Power
     signal button
 
-module Boost3v7To5v:
-    signal vcc_in
-    signal vcc_out
+module Boost3v7To5v from Regulator:
     signal gnd
 
-module BuckWideTo3v3:
-    signal vcc_in
-    signal vcc_out
+module BuckWideTo3v3 from Regulator:
     signal gnd
+
+module Ldo5V from Regulator:
+    signal gnd
+
 
 component Switch2P1T:
     signal pole1_a
@@ -65,11 +49,33 @@ component Switch2P1T:
     signal pole2_b
 
 module PowerSelector:
-    signal vcc_in_a
-    signal vcc_in_b
-    signal vcc_out
+    power_in = new Power
+    power_in_alt = new Power
+    power_out = new Power
+    signal select_alt_active_low
+
+    high_side_switch = new PFET
+    pullup_resistor = new Resistor
+    pullup_resistor.footprint = "R0603"
+    pullup_resistor.value = 100kohm +/- 20%
+
     signal gnd
-    signal select_b
+    gnd ~ power_in.gnd 
+    gnd ~ power_in_alt.gnd
+    gnd ~ power_out.gnd
+    
+    # vcc in is always connected to out. the user will un-plug the primary to switch to secondary.
+    power_in.vcc ~ power_out.vcc
+    # switch
+    high_side_switch.source ~ power_in_alt.vcc
+    high_side_switch.drain ~ power_out.vcc
+    high_side_switch.gate ~ select_alt_active_low
+    # pullup (secondary is off unless the user pulls it low.)
+    high_side_switch.source ~ pullup_resistor.1
+    power_in_alt.vcc ~ pullup_resistor.2
+
+
+
 
 module WirelessLedPcb:
     usb_connetor = new USBCConn
@@ -86,10 +92,10 @@ module WirelessLedPcb:
     boost_3v7_to_5v = new Boost3v7To5v
     buck_wide_to_3v3 = new BuckWideTo3v3
     power_selector = new PowerSelector
+    ldo_5v = new Ldo5V
 
     signal gnd
-    signal vcc_barrel
-    signal vcc_battery
+    signal vcc_system
     signal vcc_3v3
     signal vcc_led
     signal vcc_5v
@@ -102,3 +108,34 @@ module WirelessLedPcb:
     signal led_data2_5v
     signal led_data3_5v
     signal led_data4_5v
+
+    # connect barrel jack to switch and the power selector.
+    barrel_jack.power.vcc ~ power_switch.pole1_a
+    power_switch.pole1_b ~ power_selector.power_in.vcc
+    power_selector.gnd ~ gnd
+    barrel_jack.detect ~ power_selector.select_alt_active_low
+    barrel_jack.power.gnd ~ gnd
+
+    # connect battery to switch, then to 5V boost converter
+    battery_connector.power.vcc ~ power_switch.pole2_a
+    battery_connector.power.gnd ~ gnd
+    power_switch.pole2_b ~ boost_3v7_to_5v.power_in.vcc
+    boost_3v7_to_5v.power_out.vcc ~ power_selector.power_in_alt.vcc
+    boost_3v7_to_5v.power_in.gnd ~ gnd
+
+    # connect system power supplies
+    power_selector.power_out.vcc ~ vcc_system
+    vcc_system ~ buck_wide_to_3v3.power_in.vcc
+    vcc_system ~ ldo_5v.power_in.vcc
+    buck_wide_to_3v3.power_out.vcc ~ vcc_3v3
+    
+    vcc_system ~ led_strip_connector_1.power.vcc
+    vcc_system ~ led_strip_connector_2.power.vcc
+    vcc_system ~ led_strip_connector_3.power.vcc
+    vcc_system ~ led_strip_connector_4.power.vcc
+    led_strip_connector_1.power.gnd ~ gnd
+    led_strip_connector_2.power.gnd ~ gnd
+    led_strip_connector_3.power.gnd ~ gnd
+    led_strip_connector_4.power.gnd ~ gnd
+
+    # mcu hookup
