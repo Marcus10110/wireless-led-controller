@@ -1,48 +1,203 @@
 from "usb-connectors/usb-connectors.ato" import USBCConn
 from "esp32-s3/elec/src/esp32-s3.ato" import ESP32S3
 from "generics/resistors.ato" import Resistor
+from "generics/capacitors.ato" import Capacitor
+from "generics/inductors.ato" import Inductor
 from "generics/mosfets.ato" import PFET
 from "generics/regulators.ato" import Regulator
 from "generics/interfaces.ato" import Power
+import ButtonSKRPACE010 from "generics/buttons.ato"
+import ButtonPullup from "generics/buttons.ato"
 
 component BatteryConnector:
+    # https://www.digikey.com/en/products/detail/keystone-electronics/54/2254090
+    mpn = "54"
+    footprint = "Battery-54"
     power = new Power
 
 component BarrelJack:
+    # https://www.digikey.com/en/products/detail/cui-devices/PJ-002A/96962
+    mpn = "PJ-102AH"
+    footprint = "BarrelJack_CUI_PJ-102AH_Horizontal"
     power = new Power
     # detect signal is tied to gnd when not connected, and floats when connected.
     signal detect
 
 component LedStripConnector:
+    # https://jlcpcb.com/partdetail/Cixi_KefaElec-KF128L_5_03P/C474939
+    mpn = "KF128L-5.0-3P"
+    footprint = "TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal"
     power = new Power
     signal data
 
+component SN74AHC125QPWRQ1:
+    # https://www.digikey.com/en/products/detail/texas-instruments/SN74AHC125QPWRQ1/698088
+    mpn = "SN74AHC125QPWRQ1"
+    footprint = "TSSOP-14_4.4x5mm_P0.65mm"
+    power = new Power
+    power.gnd ~ pin 7
+    power.vcc ~ pin 14
+    signal in1 ~ pin 2
+    signal in2 ~ pin 5
+    signal in3 ~ pin 9
+    signal in4 ~ pin 12
+    signal out1 ~ pin 3
+    signal out2 ~ pin 6
+    signal out3 ~ pin 8
+    signal out4 ~ pin 11
+    signal oe1 ~ pin 1
+    signal oe2 ~ pin 4
+    signal oe3 ~ pin 10
+    signal oe4 ~ pin 13
+
 module QualLevelShifter:
+    ic = new SN74AHC125QPWRQ1
     power = new Power
-    signal in1
-    signal in2
-    signal in3
-    signal in4
-    signal out1
-    signal out2
-    signal out3
-    signal out4
+    signal in1 ~ ic.in1
+    signal in2 ~ ic.in2
+    signal in3 ~ ic.in3
+    signal in4 ~ ic.in4
+    signal out1 ~ ic.out1
+    signal out2 ~ ic.out2
+    signal out3 ~ ic.out3
+    signal out4 ~ ic.out4
+    ic.oe1 ~ power.gnd
+    ic.oe2 ~ power.gnd
+    ic.oe3 ~ power.gnd
+    ic.oe4 ~ power.gnd
 
-module Button:
-    power = new Power
-    signal button
+component TPS61022RWUR:
+    # https://www.digikey.com/en/products/detail/texas-instruments/TPS61022RWUT/10434643
+    mpn = "TPS61022RWUR"
+    footprint = "CONV_TPS61022RWUR"
+    signal gnd ~ pin 1
+    signal sw ~ pin 2
+    signal vout ~ pin 3
+    signal fb ~ pin 4
+    signal en ~ pin 5
+    signal mode ~ pin 6
+    signal vin ~ pin 7
+    
 
-module Boost3v7To5v from Regulator:
+module Boost3v7To5v:
+    power_in = new Power
+    power_out = new Power
+    ic = new TPS61022RWUR
+    cin = new Capacitor
+    rfbt = new Resistor
+    rfbb = new Resistor
+    cout = new Capacitor
+    l1 = new Inductor
+    # https://www.digikey.com/en/products/detail/coilcraft/XAL4020-102MEC/21381951
+    l1.mpn = "XAL4020-102MEC"
+    l1.footprint = "L1616"
+    cin.footprint = "C0805"
+    cin.value = 10uF +/- 20%
+    cin.voltage = 10V +/- 20%
+    cin.esr = 3mohm
+    rfbb.value = 100kohm +/- 1%
+    rfbb.footprint = "R0603"
+    cout.footprint = "C1206"
+    cout.value = 47uF +/- 20%
+    cout.voltage = 10V +/- 20%
+    cout.esr = 3.71mohm
+    rfbt.value = 732kohm +/- 1%
+    rfbt.footprint = "R0603"
+    l1.value = 1uH +/- 20%
+    l1.dcr = 13.3mohm
+    l1.idc = 8.7A
     signal gnd
+    power_in.gnd ~ gnd
+    power_out.gnd ~ gnd
+    power_out.vcc ~ cout.p1
+    power_in.vcc ~ ic.vin
+    power_in.vcc ~ cin.p1
+    power_in.vcc ~ l1.p1
+    power_in.vcc ~ ic.en
+    gnd ~ cin.p2
+    gnd ~ ic.mode
+    gnd ~ ic.gnd
+    gnd ~ rfbb.p2
+    gnd ~ cout.p2
+    ic.sw ~ l1.p2
+    ic.vout ~ rfbt.p1
+    ic.vout ~ cout.p1
+    ic.vout ~ power_out.vcc
+    ic.fb ~ rfbt.p2
+    ic.fb ~ rfbb.p1
 
-module BuckWideTo3v3 from Regulator:
+component TPS54308DDCR:
+    # https://www.digikey.com/en/products/detail/texas-instruments/TPS54308DDCR/7400123
+    mpn = "TPS54308DDCR"
+    footprint = "SOT-23-6"
+    signal boot ~ pin 6
+    signal en ~ pin 5
+    signal fb ~ pin 4
+    signal gnd ~ pin 1
+    signal sw ~ pin 2
+    signal vin ~ pin 3
+
+module BuckWideTo3v3:
+    power_in = new Power
+    power_out = new Power
+
+    ic = new TPS54308DDCR
+    cin = new Capacitor
+    cout = new Capacitor
+    rfbb = new Resistor
+    rfbt = new Resistor
+    l1 = new Inductor
+    cbst = new Capacitor
+
+    cin.footprint = "C0603"
+    cin.value = 3.3uF +/- 20%
+    cin.voltage = 35V +/- 20%
+    cin.esr = 4.8mohm
+    cout.footprint = "C1210"
+    cout.value = 47uF +/- 20%
+    cout.voltage = 16V +/- 20%
+    cout.esr = 3.04mohm
+    rfbb.footprint = "R0603"
+    rfbb.value = 22kohm +/- 1%
+    rfbt.footprint = "R0603"
+    rfbt.value = 100kohm +/- 1%
+    l1.mpn = "74438357068"
+    l1.footprint = "L1616"
+    l1.value = 6.8uH +/- 20%
+    l1.dcr = 74mohm
+    l1.idc = 3A
+    cbst.footprint = "C0805"
+    cbst.value = 100nF +/- 20%
+    cbst.voltage = 50V +/- 20%
+    cbst.esr = 64mohm
+
     signal gnd
+    power_in.gnd ~ gnd
+    power_out.gnd ~ gnd
+    power_out.vcc ~ cout.p1
+    power_in.vcc ~ ic.vin
+    power_in.vcc ~ cin.p1
+    gnd ~ cin.p2
+    gnd ~ ic.gnd
+    gnd ~ rfbb.p2
+    gnd ~ cout.p2
+    ic.sw ~ l1.p1
+    ic.sw ~ cbst.p2
+    ic.boot ~ cbst.p1
+    ic.fb ~ rfbt.p2
+    ic.fb ~ rfbb.p1
+    l1.p2 ~ rfbt.p1
+    l1.p2 ~ cout.p1
+
 
 module Ldo5V from Regulator:
     signal gnd
 
 
 component Switch2P1T:
+    # https://www.digikey.com/en/products/detail/c-k/L201011MS02Q/3753596
+    mpn = "L201011MS02Q"
+    footprint = "L201011MS02Q"
     signal pole1_a
     signal pole1_b
     signal pole2_a
@@ -55,6 +210,8 @@ module PowerSelector:
     signal select_alt_active_low
 
     high_side_switch = new PFET
+    high_side_switch.mpn = "DMP2066LSN-7"
+    high_side_switch.footprint = "SC-59"
     pullup_resistor = new Resistor
     pullup_resistor.footprint = "R0603"
     pullup_resistor.value = 100kohm +/- 20%
@@ -81,7 +238,6 @@ module WirelessLedPcb:
     usb_connetor = new USBCConn
     mcu = new ESP32S3
     level_shifter = new QualLevelShifter
-    button = new Button
     battery_connector = new BatteryConnector
     barrel_jack = new BarrelJack
     led_strip_connector_1 = new LedStripConnector
@@ -93,21 +249,14 @@ module WirelessLedPcb:
     buck_wide_to_3v3 = new BuckWideTo3v3
     power_selector = new PowerSelector
     ldo_5v = new Ldo5V
+    boot_button = new ButtonPullup
 
     signal gnd
-    signal vcc_system
-    signal vcc_3v3
-    signal vcc_led
-    signal vcc_5v
-    signal barrel_detect
-    signal led_data1
-    signal led_data2
-    signal led_data3
-    signal led_data4
-    signal led_data1_5v
-    signal led_data2_5v
-    signal led_data3_5v
-    signal led_data4_5v
+    power_system = new Power
+    power_3v3 = new Power
+
+    power_system.gnd ~ gnd
+    power_3v3.gnd ~ gnd
 
     # connect barrel jack to switch and the power selector.
     barrel_jack.power.vcc ~ power_switch.pole1_a
@@ -120,22 +269,37 @@ module WirelessLedPcb:
     battery_connector.power.vcc ~ power_switch.pole2_a
     battery_connector.power.gnd ~ gnd
     power_switch.pole2_b ~ boost_3v7_to_5v.power_in.vcc
-    boost_3v7_to_5v.power_out.vcc ~ power_selector.power_in_alt.vcc
+    boost_3v7_to_5v.power_out ~ power_selector.power_in_alt
     boost_3v7_to_5v.power_in.gnd ~ gnd
 
     # connect system power supplies
-    power_selector.power_out.vcc ~ vcc_system
-    vcc_system ~ buck_wide_to_3v3.power_in.vcc
-    vcc_system ~ ldo_5v.power_in.vcc
-    buck_wide_to_3v3.power_out.vcc ~ vcc_3v3
+    power_selector.power_out ~ power_system
+    power_system ~ buck_wide_to_3v3.power_in
+    power_system ~ ldo_5v.power_in
+    buck_wide_to_3v3.power_out ~ power_3v3
     
-    vcc_system ~ led_strip_connector_1.power.vcc
-    vcc_system ~ led_strip_connector_2.power.vcc
-    vcc_system ~ led_strip_connector_3.power.vcc
-    vcc_system ~ led_strip_connector_4.power.vcc
-    led_strip_connector_1.power.gnd ~ gnd
-    led_strip_connector_2.power.gnd ~ gnd
-    led_strip_connector_3.power.gnd ~ gnd
-    led_strip_connector_4.power.gnd ~ gnd
+    power_system ~ led_strip_connector_1.power
+    power_system ~ led_strip_connector_2.power
+    power_system ~ led_strip_connector_3.power
+    power_system ~ led_strip_connector_4.power
 
     # mcu hookup
+    usb_connetor.usb2 ~ mcu.usb2
+    usb_connetor.power.gnd ~ gnd
+
+    mcu.power ~ power_3v3
+    mcu.io14 ~ level_shifter.in1
+    mcu.io15 ~ level_shifter.in2
+    mcu.io16 ~ level_shifter.in3
+    mcu.io17 ~ level_shifter.in4
+
+    boot_button.power ~ power_3v3
+    boot_button.out ~ mcu.io0
+    boot_button.btn -> ButtonSKRPACE010
+
+    # led strip hookup
+    level_shifter.out1 ~ led_strip_connector_1.data
+    level_shifter.out2 ~ led_strip_connector_2.data
+    level_shifter.out3 ~ led_strip_connector_3.data
+    level_shifter.out4 ~ led_strip_connector_4.data
+
