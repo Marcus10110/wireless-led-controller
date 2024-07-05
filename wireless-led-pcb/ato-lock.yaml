@@ -1,0 +1,149 @@
+poses:
+  schematic:
+    081794b6:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -165.0
+        y: -75.0
+      rotation: 0
+    09670805:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 120.0
+        y: -30.0
+      rotation: 0
+    0c007bb0:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -180.0
+        y: -165.0
+      rotation: 0
+    3216d5e2:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -225.0
+        y: 165.0
+      rotation: 0
+    3a054811:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -225.0
+        y: 210.0
+      rotation: 0
+    5641e496:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -330.0
+        y: 225.0
+      rotation: 0
+    5c81b986:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -195.0
+        y: -30.0
+      rotation: 0
+    61423fe1:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -105.0
+        y: 75.0
+      rotation: 0
+    618992b7:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -90.0
+        y: -60.0
+      rotation: 0
+    85bd5fda:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -135.0
+        y: 195.0
+      rotation: 0
+    9f2ac3a7:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 0.0
+        y: 165.0
+      rotation: 0
+    a11ce28b:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 30.0
+        y: -135.0
+      rotation: 0
+    c6e4fd14:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 60.0
+        y: 30.0
+      rotation: 0
+    d225e667:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 165.0
+        y: -75.0
+      rotation: 0
+    d61aed1f:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 90.0
+        y: -90.0
+      rotation: 0
+    d75e9deb:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -60.0
+        y: -135.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::mcu.lil_cap:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 540.0
+        y: 60.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::power_selector.high_side_switch:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 240.0
+        y: 165.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::power_selector.pullup_resistor:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 390.0
+        y: 255.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::usb_connetor.cc1_res:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -285.0
+        y: 120.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::usb_connetor.cc2_res:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -285.0
+        y: 30.0
+      rotation: 0

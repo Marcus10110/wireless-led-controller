@@ -18,7 +18,7 @@ component BatteryConnector:
 component BarrelJack:
     # https://www.digikey.com/en/products/detail/cui-devices/PJ-002A/96962
     mpn = "PJ-102AH"
-    footprint = "BarrelJack_CUI_PJ-102AH_Horizontal"
+    footprint = "Connector_BarrelJack:BarrelJack_CUI_PJ-102AH_Horizontal"
     power = new Power
     # detect signal is tied to gnd when not connected, and floats when connected.
     signal detect
@@ -26,7 +26,7 @@ component BarrelJack:
 component LedStripConnector:
     # https://jlcpcb.com/partdetail/Cixi_KefaElec-KF128L_5_03P/C474939
     mpn = "KF128L-5.0-3P"
-    footprint = "TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal"
+    footprint = "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal"
     power = new Power
     signal data
     power.vcc ~ pin 1
@@ -36,7 +36,7 @@ component LedStripConnector:
 component SN74AHC125QPWRQ1:
     # https://www.digikey.com/en/products/detail/texas-instruments/SN74AHC125QPWRQ1/698088
     mpn = "SN74AHC125QPWRQ1"
-    footprint = "TSSOP-14_4.4x5mm_P0.65mm"
+    footprint = "Package_SO:TSSOP-14_4.4x5mm_P0.65mm"
     power = new Power
     power.gnd ~ pin 7
     power.vcc ~ pin 14
@@ -93,7 +93,7 @@ module Boost3v7To5v:
     l1 = new Inductor
     # https://www.digikey.com/en/products/detail/coilcraft/XAL4020-102MEC/21381951
     l1.mpn = "XAL4020-102MEC"
-    l1.footprint = "L1616"
+    l1.footprint = "IND_XAL4020_COC"
     cin.footprint = "C0805"
     cin.value = 10uF +/- 20%
     cin.voltage = 10V +/- 20%
@@ -132,7 +132,7 @@ module Boost3v7To5v:
 component TPS54308DDCR:
     # https://www.digikey.com/en/products/detail/texas-instruments/TPS54308DDCR/7400123
     mpn = "TPS54308DDCR"
-    footprint = "SOT-23-6"
+    footprint = "Package_TO_SOT_SMD:SOT-23-6"
     signal boot ~ pin 6
     signal en ~ pin 5
     signal fb ~ pin 4
@@ -164,8 +164,9 @@ module BuckWideTo3v3:
     rfbb.value = 22kohm +/- 1%
     rfbt.footprint = "R0603"
     rfbt.value = 100kohm +/- 1%
+    # https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/74438357068/6833542
     l1.mpn = "74438357068"
-    l1.footprint = "L1616"
+    l1.footprint = "IND_8357068_WRE"
     l1.value = 6.8uH +/- 20%
     l1.dcr = 74mohm
     l1.idc = 3A
@@ -194,7 +195,7 @@ module BuckWideTo3v3:
 
 component AP7375_50SA_7:
     mpn = "AP7375-50SA-7"
-    footprint = "SOT-23-3"
+    footprint = "Package_TO_SOT_SMD:SOT-23-3"
     signal gnd ~ pin 3
     signal v_in ~ pin 1
     signal v_out ~ pin 2
@@ -243,7 +244,7 @@ module PowerSelector:
 
     high_side_switch = new PFET
     high_side_switch.mpn = "DMP2066LSN-7"
-    high_side_switch.footprint = "SC-59"
+    high_side_switch.footprint = "Package_TO_SOT_SMD:SC-59"
     pullup_resistor = new Resistor
     pullup_resistor.footprint = "R0603"
     pullup_resistor.value = 100kohm +/- 20%
