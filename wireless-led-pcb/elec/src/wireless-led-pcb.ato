@@ -14,6 +14,8 @@ component BatteryConnector:
     mpn = "54"
     footprint = "Battery-54"
     power = new Power
+    power.vcc ~ pin 1
+    power.gnd ~ pin 2
 
 component BarrelJack:
     # https://www.digikey.com/en/products/detail/cui-devices/PJ-002A/96962
@@ -22,11 +24,15 @@ component BarrelJack:
     power = new Power
     # detect signal is tied to gnd when not connected, and floats when connected.
     signal detect
+    power.vcc ~ pin 1
+    power.gnd ~ pin 2
+    detect ~ pin 3
+
 
 component LedStripConnector:
     # https://jlcpcb.com/partdetail/Cixi_KefaElec-KF128L_5_03P/C474939
     mpn = "KF128L-5.0-3P"
-    footprint = "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal"
+    footprint = "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-3_1x03_P5.00mm_Horizontal"
     power = new Power
     signal data
     power.vcc ~ pin 1
@@ -68,6 +74,7 @@ module QualLevelShifter:
     ic.oe2 ~ power.gnd
     ic.oe3 ~ power.gnd
     ic.oe4 ~ power.gnd
+    ic.power ~ power
 
 component TPS61022RWUR:
     # https://www.digikey.com/en/products/detail/texas-instruments/TPS61022RWUT/10434643
@@ -231,10 +238,17 @@ component Switch2P1T:
     # https://www.digikey.com/en/products/detail/c-k/L201011MS02Q/3753596
     mpn = "L201011MS02Q"
     footprint = "L201011MS02Q"
-    signal pole1_a
-    signal pole1_b
-    signal pole2_a
-    signal pole2_b
+    signal pole1_a ~ pin 2
+    signal pole1_b ~ pin 1
+    signal pole2_a ~ pin 5
+    signal pole2_b ~ pin 4
+
+component DMP2066LSN_7 from PFET:
+    mpn = "DMP2066LSN-7"
+    footprint = "Package_TO_SOT_SMD:SC-59"
+    gate ~ pin 1
+    source ~ pin 2
+    drain ~ pin 3
 
 module PowerSelector:
     power_in = new Power
@@ -242,9 +256,7 @@ module PowerSelector:
     power_out = new Power
     signal select_alt_active_low
 
-    high_side_switch = new PFET
-    high_side_switch.mpn = "DMP2066LSN-7"
-    high_side_switch.footprint = "Package_TO_SOT_SMD:SC-59"
+    high_side_switch = new DMP2066LSN_7
     pullup_resistor = new Resistor
     pullup_resistor.footprint = "R0603"
     pullup_resistor.value = 100kohm +/- 20%
@@ -261,7 +273,7 @@ module PowerSelector:
     high_side_switch.drain ~ power_out.vcc
     high_side_switch.gate ~ select_alt_active_low
     # pullup (secondary is off unless the user pulls it low.)
-    high_side_switch.source ~ pullup_resistor.1
+    high_side_switch.gate ~ pullup_resistor.1
     power_in_alt.vcc ~ pullup_resistor.2
 
 
@@ -325,6 +337,7 @@ module WirelessLedPcb:
     mcu.io15 ~ level_shifter.in2
     mcu.io16 ~ level_shifter.in3
     mcu.io17 ~ level_shifter.in4
+    level_shifter.power ~ ldo_5v.power_out
 
     boot_button.power ~ power_3v3
     boot_button.out ~ mcu.io0
