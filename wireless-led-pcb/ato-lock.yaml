@@ -1,5 +1,19 @@
 poses:
   schematic:
+    003e66e6:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -135.0
+        y: 15.0
+      rotation: 0
+    073c03d0:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 75.0
+        y: 210.0
+      rotation: 0
     081794b6:
       mirror_x: false
       mirror_y: false
@@ -14,12 +28,138 @@ poses:
         x: 120.0
         y: -30.0
       rotation: 0
+    0ab1b49e:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -345.0
+        y: 315.0
+      rotation: 0
     0c007bb0:
       mirror_x: false
       mirror_y: false
       position:
         x: -180.0
         y: -165.0
+      rotation: 0
+    0c75b211:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -300.0
+        y: 90.0
+      rotation: 0
+    0caeca44:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 285.0
+        y: -180.0
+      rotation: 0
+    0dabe2f0:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -135.0
+        y: 225.0
+      rotation: 0
+    1000b037:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 180.0
+        y: 45.0
+      rotation: 0
+    10d191e3:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 255.0
+        y: 300.0
+      rotation: 0
+    141bd889:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -375.0
+        y: -45.0
+      rotation: 0
+    '18187563':
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 105.0
+        y: 165.0
+      rotation: 0
+    1ea30768:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 120.0
+        y: 345.0
+      rotation: 0
+    1f25f8de:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 15.0
+        y: 240.0
+      rotation: 0
+    1f48ecf6:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -525.0
+        y: 270.0
+      rotation: 0
+    2279557b:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -195.0
+        y: 495.0
+      rotation: 0
+    25a83a45:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -165.0
+        y: 45.0
+      rotation: 0
+    261c3c27:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -30.0
+        y: 525.0
+      rotation: 0
+    267d2069:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -75.0
+        y: 180.0
+      rotation: 0
+    2835247b:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -195.0
+        y: 105.0
+      rotation: 0
+    28b8ca99:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -360.0
+        y: 135.0
+      rotation: 0
+    2edcf9a9:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -45.0
+        y: -285.0
       rotation: 0
     3216d5e2:
       mirror_x: false
@@ -28,12 +168,89 @@ poses:
         x: -225.0
         y: 165.0
       rotation: 0
+    32df6172:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -165.0
+        y: 135.0
+      rotation: 0
+    372be151:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -330.0
+        y: 405.0
+      rotation: 0
+    39bfc58c:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -510.0
+        y: -45.0
+      rotation: 0
     3a054811:
       mirror_x: false
       mirror_y: false
       position:
         x: -225.0
         y: 210.0
+      rotation: 0
+    3af7a7e9:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -375.0
+        y: 15.0
+      rotation: 0
+    3cad6b11:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 90.0
+        y: 150.0
+      rotation: 0
+    3d3b7119:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 225.0
+        y: 0.0
+      rotation: 0
+    46d02048:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -330.0
+        y: -15.0
+      rotation: 0
+    48b28f8f:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -510.0
+        y: 315.0
+      rotation: 0
+    '49002565':
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -60.0
+        y: 75.0
+      rotation: 0
+    '49144783':
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 120.0
+        y: 390.0
+      rotation: 0
+    4b95ae8a:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -465.0
+        y: 135.0
       rotation: 0
     5641e496:
       mirror_x: false
@@ -42,6 +259,20 @@ poses:
         x: -330.0
         y: 225.0
       rotation: 0
+    5a325c39:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -30.0
+        y: 150.0
+      rotation: 0
+    5c01fecc:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -360.0
+        y: 165.0
+      rotation: 0
     5c81b986:
       mirror_x: false
       mirror_y: false
@@ -49,12 +280,19 @@ poses:
         x: -195.0
         y: -30.0
       rotation: 0
+    5d337134:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 0.0
+        y: -45.0
+      rotation: 0
     61423fe1:
       mirror_x: false
       mirror_y: false
       position:
-        x: -105.0
-        y: 75.0
+        x: -75.0
+        y: 30.0
       rotation: 0
     618992b7:
       mirror_x: false
@@ -63,12 +301,194 @@ poses:
         x: -90.0
         y: -60.0
       rotation: 0
+    650e5fb1:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -270.0
+        y: 330.0
+      rotation: 0
+    67a54273:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -240.0
+        y: -210.0
+      rotation: 0
+    6845cfe0:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -405.0
+        y: 60.0
+      rotation: 0
+    6bad2b50:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 150.0
+        y: 120.0
+      rotation: 0
+    6d41a08b:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 105.0
+        y: 210.0
+      rotation: 0
+    '70094189':
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 15.0
+        y: 225.0
+      rotation: 0
+    7779d742:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 345.0
+        y: -15.0
+      rotation: 0
+    7ca4c362:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -120.0
+        y: -60.0
+      rotation: 0
+    7db1ad25:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -480.0
+        y: 90.0
+      rotation: 0
+    7fde4161:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 45.0
+        y: 135.0
+      rotation: 0
+    8070b72c:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -465.0
+        y: 180.0
+      rotation: 0
+    831d17ce:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -360.0
+        y: 30.0
+      rotation: 0
+    8347b3d1:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -330.0
+        y: 225.0
+      rotation: 0
+    840ab6a4:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -300.0
+        y: -105.0
+      rotation: 0
     85bd5fda:
       mirror_x: false
       mirror_y: false
       position:
         x: -135.0
         y: 195.0
+      rotation: 0
+    8609fa0d:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 255.0
+        y: 75.0
+      rotation: 0
+    8d71a228:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -420.0
+        y: -15.0
+      rotation: 0
+    917aa762:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 165.0
+        y: 225.0
+      rotation: 0
+    9264145d:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 15.0
+        y: 60.0
+      rotation: 0
+    92714b02:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 225.0
+        y: -255.0
+      rotation: 0
+    9395391f:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -255.0
+        y: 255.0
+      rotation: 0
+    '94388754':
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -120.0
+        y: 390.0
+      rotation: 0
+    98f522d6:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -45.0
+        y: 300.0
+      rotation: 0
+    '99008391':
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -225.0
+        y: 435.0
+      rotation: 0
+    9921f026:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -450.0
+        y: 225.0
+      rotation: 0
+    992f9696:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -120.0
+        y: 285.0
+      rotation: 0
+    9d32bbcc:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -60.0
+        y: 330.0
       rotation: 0
     9f2ac3a7:
       mirror_x: false
@@ -77,6 +497,13 @@ poses:
         x: 0.0
         y: 165.0
       rotation: 0
+    a03f6c1e:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 255.0
+        y: 240.0
+      rotation: 0
     a11ce28b:
       mirror_x: false
       mirror_y: false
@@ -84,12 +511,138 @@ poses:
         x: 30.0
         y: -135.0
       rotation: 0
-    c6e4fd14:
+    a2352d17:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -60.0
+        y: 480.0
+      rotation: 0
+    a6197aa7:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -210.0
+        y: 0.0
+      rotation: 0
+    a7bd36fe:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -315.0
+        y: 495.0
+      rotation: 0
+    ae9a80da:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 345.0
+        y: 330.0
+      rotation: 0
+    b0feba55:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -60.0
+        y: 195.0
+      rotation: 0
+    b5a5ccac:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -210.0
+        y: 195.0
+      rotation: 0
+    b7819bbc:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 75.0
+        y: 0.0
+      rotation: 0
+    b9fd8346:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 300.0
+        y: -60.0
+      rotation: 0
+    ba532269:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -75.0
+        y: 120.0
+      rotation: 0
+    bb0599e9:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -465.0
+        y: 45.0
+      rotation: 0
+    bc3dd727:
       mirror_x: false
       mirror_y: false
       position:
         x: 60.0
+        y: 300.0
+      rotation: 0
+    bccf9194:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -75.0
+        y: 420.0
+      rotation: 0
+    c10db263:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 285.0
+        y: 210.0
+      rotation: 0
+    c509f4d4:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 315.0
+        y: 285.0
+      rotation: 0
+    c6e4fd14:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 210.0
+        y: 180.0
+      rotation: 0
+    c745dc7d:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -195.0
+        y: 360.0
+      rotation: 0
+    c7c573a5:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -165.0
+        y: 120.0
+      rotation: 0
+    ce2cfc54:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -315.0
         y: 30.0
+      rotation: 0
+    cea3fdaa:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 195.0
+        y: 315.0
       rotation: 0
     d225e667:
       mirror_x: false
@@ -97,6 +650,20 @@ poses:
       position:
         x: 165.0
         y: -75.0
+      rotation: 0
+    d2980a7c:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 120.0
+        y: -270.0
+      rotation: 0
+    d2c8b17b:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -165.0
+        y: -270.0
       rotation: 0
     d61aed1f:
       mirror_x: false
@@ -112,38 +679,234 @@ poses:
         x: -60.0
         y: -135.0
       rotation: 0
+    d977638b:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 75.0
+        y: 30.0
+      rotation: 0
+    df476aff:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 90.0
+        y: 270.0
+      rotation: 0
+    e27b05b0:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -120.0
+        y: 450.0
+      rotation: 0
+    e630552b:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -75.0
+        y: 0.0
+      rotation: 0
+    e6c705f9:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 105.0
+        y: 75.0
+      rotation: 0
+    e91be7a4:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 165.0
+        y: 270.0
+      rotation: 0
+    efc6df85:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -225.0
+        y: 30.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::boost_3v7_to_5v.cin:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 510.0
+        y: 480.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::boost_3v7_to_5v.cout:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 510.0
+        y: 450.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::boost_3v7_to_5v.l1:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 510.0
+        y: 420.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::boost_3v7_to_5v.rfbb:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 510.0
+        y: 375.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::boost_3v7_to_5v.rfbt:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 510.0
+        y: 330.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::boot_button.pullup:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 645.0
+        y: 0.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::buck_wide_to_3v3.cbst:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 600.0
+        y: 45.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::buck_wide_to_3v3.cin:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 600.0
+        y: 180.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::buck_wide_to_3v3.cout:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 600.0
+        y: 105.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::buck_wide_to_3v3.l1:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 390.0
+        y: 75.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::buck_wide_to_3v3.rfbb:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 405.0
+        y: 30.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::buck_wide_to_3v3.rfbt:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 525.0
+        y: -270.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::ldo_5v.cin:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 525.0
+        y: -135.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::ldo_5v.cout:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 510.0
+        y: -225.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::mcu.big_cap_1:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 495.0
+        y: 300.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::mcu.big_cap_2:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 510.0
+        y: 255.0
+      rotation: 0
+    elec/src/wireless-led-pcb.ato:WirelessLedPcb::mcu.enable_button.pullup:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 510.0
+        y: 195.0
+      rotation: 0
     elec/src/wireless-led-pcb.ato:WirelessLedPcb::mcu.lil_cap:
       mirror_x: false
       mirror_y: false
       position:
-        x: 540.0
-        y: 60.0
+        x: 525.0
+        y: -165.0
       rotation: 0
     elec/src/wireless-led-pcb.ato:WirelessLedPcb::power_selector.high_side_switch:
       mirror_x: false
       mirror_y: false
       position:
-        x: 240.0
-        y: 165.0
+        x: 510.0
+        y: 30.0
       rotation: 0
     elec/src/wireless-led-pcb.ato:WirelessLedPcb::power_selector.pullup_resistor:
       mirror_x: false
       mirror_y: false
       position:
-        x: 390.0
-        y: 255.0
+        x: 525.0
+        y: -75.0
       rotation: 0
     elec/src/wireless-led-pcb.ato:WirelessLedPcb::usb_connetor.cc1_res:
       mirror_x: false
       mirror_y: false
       position:
-        x: -285.0
-        y: 120.0
+        x: 480.0
+        y: 165.0
       rotation: 0
     elec/src/wireless-led-pcb.ato:WirelessLedPcb::usb_connetor.cc2_res:
       mirror_x: false
       mirror_y: false
       position:
-        x: -285.0
-        y: 30.0
+        x: 495.0
+        y: 120.0
+      rotation: 0
+    f3db2d09:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 0.0
+        y: 270.0
+      rotation: 0
+    f4523b0b:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -420.0
+        y: 330.0
+      rotation: 0
+    f78b7a50:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: 30.0
+        y: 390.0
+      rotation: 0
+    fc77ed9f:
+      mirror_x: false
+      mirror_y: false
+      position:
+        x: -210.0
+        y: 300.0
       rotation: 0
