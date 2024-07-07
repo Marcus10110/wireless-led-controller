@@ -252,31 +252,37 @@ component DMP2066LSN_7 from PFET:
     source ~ pin 2
     drain ~ pin 3
 
-module PowerSelector:
-    power_in = new Power
-    power_in_alt = new Power
-    power_out = new Power
-    signal select_alt_active_low
+component Header2Pin:
+    mpn = "G800W306018EU"
+    footprint = "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+    signal pin1 ~ pin 1
+    signal pin2 ~ pin 2
 
-    high_side_switch = new DMP2066LSN_7
-    pullup_resistor = new Resistor
-    pullup_resistor.footprint = "R0603"
-    pullup_resistor.value = 100kohm +/- 20%
+# module PowerSelector:
+#     power_in = new Power
+#     power_in_alt = new Power
+#     power_out = new Power
+#     signal select_alt_active_low
 
-    signal gnd
-    gnd ~ power_in.gnd 
-    gnd ~ power_in_alt.gnd
-    gnd ~ power_out.gnd
+#     high_side_switch = new DMP2066LSN_7
+#     pullup_resistor = new Resistor
+#     pullup_resistor.footprint = "R0603"
+#     pullup_resistor.value = 100kohm +/- 20%
+
+#     signal gnd
+#     gnd ~ power_in.gnd 
+#     gnd ~ power_in_alt.gnd
+#     gnd ~ power_out.gnd
     
-    # vcc in is always connected to out. the user will un-plug the primary to switch to secondary.
-    power_in.vcc ~ power_out.vcc
-    # switch
-    high_side_switch.source ~ power_in_alt.vcc
-    high_side_switch.drain ~ power_out.vcc
-    high_side_switch.gate ~ select_alt_active_low
-    # pullup (secondary is off unless the user pulls it low.)
-    high_side_switch.gate ~ pullup_resistor.1
-    power_in_alt.vcc ~ pullup_resistor.2
+#     # vcc in is always connected to out. the user will un-plug the primary to switch to secondary.
+#     power_in.vcc ~ power_out.vcc
+#     # switch
+#     high_side_switch.source ~ power_in_alt.vcc
+#     high_side_switch.drain ~ power_out.vcc
+#     high_side_switch.gate ~ select_alt_active_low
+#     # pullup (secondary is off unless the user pulls it low.)
+#     high_side_switch.gate ~ pullup_resistor.1
+#     power_in_alt.vcc ~ pullup_resistor.2
 
 component TestPoint:
     mpn = "5009"
@@ -298,7 +304,8 @@ module WirelessLedPcb:
     power_switch = new Switch2P1T
     boost_3v7_to_5v = new Boost3v7To5v
     buck_wide_to_3v3 = new BuckWideTo3v3
-    power_selector = new PowerSelector
+    # power_selector = new PowerSelector
+    power_jumper = new Header2Pin
     ldo_5v = new Ldo5V
     boot_button = new ButtonPullup
 
@@ -319,22 +326,27 @@ module WirelessLedPcb:
     power_system.gnd ~ gnd
     power_3v3.gnd ~ gnd
 
+    # connect power jumper.
+    boost_3v7_to_5v.power_out.vcc ~ power_jumper.pin2
+    power_system.vcc ~ power_jumper.pin1
+
     # connect barrel jack to switch and the power selector.
     barrel_jack.power.vcc ~ power_switch.pole1_a
-    power_switch.pole1_b ~ power_selector.power_in.vcc
-    power_selector.gnd ~ gnd
-    barrel_jack.detect ~ power_selector.select_alt_active_low
+    power_switch.pole1_b ~ power_system.vcc
+    # power_switch.pole1_b ~ power_selector.power_in.vcc
+    # power_selector.gnd ~ gnd
+    # barrel_jack.detect ~ power_selector.select_alt_active_low
     barrel_jack.power.gnd ~ gnd
 
     # connect battery to switch, then to 5V boost converter
     battery_connector.power.vcc ~ power_switch.pole2_a
     battery_connector.power.gnd ~ gnd
     power_switch.pole2_b ~ boost_3v7_to_5v.power_in.vcc
-    boost_3v7_to_5v.power_out ~ power_selector.power_in_alt
+    # boost_3v7_to_5v.power_out ~ power_selector.power_in_alt
     boost_3v7_to_5v.power_in.gnd ~ gnd
 
     # connect system power supplies
-    power_selector.power_out ~ power_system
+    # power_selector.power_out ~ power_system
     power_system ~ buck_wide_to_3v3.power_in
     power_system ~ ldo_5v.power_in
     buck_wide_to_3v3.power_out ~ power_3v3
