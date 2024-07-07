@@ -201,6 +201,7 @@ module BuckWideTo3v3:
     l1.p2 ~ cout.p1
 
 component AP7375_50SA_7:
+    # https://www.digikey.com/en/products/detail/diodes-incorporated/AP7375-50SA-7/16400218
     mpn = "AP7375-50SA-7"
     footprint = "Package_TO_SOT_SMD:SOT-23-3"
     signal gnd ~ pin 3
@@ -244,6 +245,7 @@ component Switch2P1T:
     signal pole2_b ~ pin 4
 
 component DMP2066LSN_7 from PFET:
+    # https://www.digikey.com/en/products/detail/diodes-incorporated/DMP2066LSN-7/1964690
     mpn = "DMP2066LSN-7"
     footprint = "Package_TO_SOT_SMD:SC-59"
     gate ~ pin 1
