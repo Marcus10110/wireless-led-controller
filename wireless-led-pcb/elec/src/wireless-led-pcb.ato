@@ -276,7 +276,11 @@ module PowerSelector:
     high_side_switch.gate ~ pullup_resistor.1
     power_in_alt.vcc ~ pullup_resistor.2
 
-
+component TestPoint:
+    mpn = "5009"
+    footprint = "TestPoint:TestPoint_Keystone_5005-5009_Compact"
+    signal tp ~ pin 1
+    designator_prefix = "J"
 
 
 module WirelessLedPcb:
@@ -295,6 +299,16 @@ module WirelessLedPcb:
     power_selector = new PowerSelector
     ldo_5v = new Ldo5V
     boot_button = new ButtonPullup
+
+    tp_gnd = new TestPoint
+    tp_cell = new TestPoint
+    tp2_5v_boost = new TestPoint
+    tp3_3v3 = new TestPoint
+    tp4_5v_ldo = new TestPoint
+    tp_detect = new TestPoint
+    tp_led1_data = new TestPoint
+    tp_system_power = new TestPoint
+    
 
     signal gnd
     power_system = new Power
@@ -349,3 +363,12 @@ module WirelessLedPcb:
     level_shifter.out3 ~ led_strip_connector_3.data
     level_shifter.out4 ~ led_strip_connector_4.data
 
+    # test points
+    tp_gnd.tp ~ gnd
+    tp_cell.tp ~ battery_connector.power.vcc
+    tp2_5v_boost.tp ~ boost_3v7_to_5v.power_out.vcc
+    tp3_3v3.tp ~ power_3v3.vcc
+    tp4_5v_ldo.tp ~ ldo_5v.power_out.vcc
+    tp_detect.tp ~ barrel_jack.detect
+    tp_led1_data.tp ~ mcu.io14
+    tp_system_power.tp ~ power_system.vcc
