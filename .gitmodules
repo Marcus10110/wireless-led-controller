@@ -1,0 +1,9 @@
+[submodule "elec/src/esp32-s3"]
+	path = elec/src/esp32-s3
+	url = https://github.com/napowderly/esp32-s3
+[submodule "elec/src/generics"]
+	path = elec/src/generics
+	url = https://github.com/atopile/generics
+[submodule "elec/src/usb-connectors"]
+	path = elec/src/usb-connectors
+	url = https://github.com/atopile/usb-connectors
