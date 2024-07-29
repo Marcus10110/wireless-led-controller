@@ -8,6 +8,7 @@ from "generics/regulators.ato" import Regulator
 from "generics/interfaces.ato" import Power
 import ButtonSKRPACE010 from "generics/buttons.ato"
 import ButtonPullup from "generics/buttons.ato"
+import _0438_period_250WR from "_0438_period_250WR.ato"
 
 component BatteryConnector:
     # https://www.digikey.com/en/products/detail/keystone-electronics/54/2254090
@@ -98,6 +99,11 @@ module Boost3v7To5v:
     rfbb = new Resistor
     cout = new Capacitor
     l1 = new Inductor
+
+    # net names.
+    ic.fb.override_net_name = "FB_BOOST"
+    ic.sw.override_net_name = "SW_BOOST"
+
     # https://www.digikey.com/en/products/detail/coilcraft/XAL4020-102MEC/21381951
     l1.mpn = "XAL4020-102MEC"
     l1.footprint = "IND_XAL4020_COC"
@@ -153,16 +159,23 @@ module BuckWideTo3v3:
 
     ic = new TPS54308DDCR
     cin = new Capacitor
+    cin_small = new Capacitor
     cout = new Capacitor
     rfbb = new Resistor
     rfbt = new Resistor
     l1 = new Inductor
     cbst = new Capacitor
 
+    ic.fb.override_net_name = "FB_BUCK"
+    ic.sw.override_net_name = "SW_BUCK"
+
     cin.footprint = "C0603"
     cin.value = 3.3uF +/- 20%
     cin.voltage = 35V +/- 20%
     cin.esr = 4.8mohm
+    cin_small.footprint = "C0603"
+    cin_small.value = 0.1uF +/- 20%
+    cin_small.voltage = 35V +/- 20%
     cout.footprint = "C1210"
     cout.value = 47uF +/- 20%
     cout.voltage = 16V +/- 20%
@@ -171,12 +184,12 @@ module BuckWideTo3v3:
     rfbb.value = 22kohm +/- 1%
     rfbt.footprint = "R0603"
     rfbt.value = 100kohm +/- 1%
-    # https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/74438357068/6833542
-    l1.mpn = "74438357068"
-    l1.footprint = "IND_8357068_WRE"
-    l1.value = 6.8uH +/- 20%
-    l1.dcr = 74mohm
-    l1.idc = 3A
+    # https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/74477110/1638613
+    l1.mpn = "74477110"
+    l1.footprint = "WE-PD_1260"
+    l1.value = 10uH +/- 20%
+    l1.dcr = 25mohm
+    l1.idc = 5A
     cbst.footprint = "C0805"
     cbst.value = 100nF +/- 20%
     cbst.voltage = 50V +/- 20%
@@ -188,7 +201,9 @@ module BuckWideTo3v3:
     power_out.vcc ~ cout.p1
     power_in.vcc ~ ic.vin
     power_in.vcc ~ cin.p1
+    power_in.vcc ~ cin_small.p1
     gnd ~ cin.p2
+    gnd ~ cin_small.p2
     gnd ~ ic.gnd
     gnd ~ rfbb.p2
     gnd ~ cout.p2
@@ -290,6 +305,16 @@ component TestPoint:
     signal tp ~ pin 1
     designator_prefix = "J"
 
+module Fuse:
+    fuse = new _0438_period_250WR
+    in = new Power
+    out = new Power
+    signal gnd
+    in.gnd ~ gnd
+    out.gnd ~ gnd
+    in.vcc ~ fuse._1
+    out.vcc ~ fuse._2
+
 
 module WirelessLedPcb:
     usb_connetor = new USBCConn
@@ -304,17 +329,15 @@ module WirelessLedPcb:
     power_switch = new Switch2P1T
     boost_3v7_to_5v = new Boost3v7To5v
     buck_wide_to_3v3 = new BuckWideTo3v3
+    buck_fuse_in = new Fuse
     # power_selector = new PowerSelector
     power_jumper = new Header2Pin
     ldo_5v = new Ldo5V
     boot_button = new ButtonPullup
 
     tp_gnd = new TestPoint
-    tp_cell = new TestPoint
-    tp2_5v_boost = new TestPoint
     tp3_3v3 = new TestPoint
     tp4_5v_ldo = new TestPoint
-    tp_detect = new TestPoint
     tp_led1_data = new TestPoint
     tp_system_power = new TestPoint
     
@@ -322,6 +345,30 @@ module WirelessLedPcb:
     signal gnd
     power_system = new Power
     power_3v3 = new Power
+
+    # net labels
+    gnd.override_net_name = "GND"
+    power_system.vcc.override_net_name = "VSYS"
+    power_3v3.vcc.override_net_name = "3V3"
+    battery_connector.power.vcc.override_net_name = "VBAT"
+    barrel_jack.power.vcc.override_net_name = "VJACK"
+    power_switch.pole2_b.override_net_name = "VBAT_SW"
+    boost_3v7_to_5v.power_out.vcc.override_net_name = "5V"
+    ldo_5v.power_out.vcc.override_net_name = "V5_LDO"
+    buck_wide_to_3v3.power_in.vcc.override_net_name = "VIN_BUCK"
+    mcu.io14.override_net_name = "LED1_LV"
+    mcu.io15.override_net_name = "LED2_LV"
+    mcu.io16.override_net_name = "LED3_LV"
+    mcu.io17.override_net_name = "LED4_LV"
+    led_strip_connector_1.data.override_net_name = "LED1"
+    led_strip_connector_2.data.override_net_name = "LED2"
+    led_strip_connector_3.data.override_net_name = "LED3"
+    led_strip_connector_4.data.override_net_name = "LED4"
+    mcu.io0.override_net_name = "BOOT"
+    usb_connetor.usb2.dm.override_net_name = "D_N"
+    usb_connetor.usb2.dp.override_net_name = "D_P"
+    
+
 
     power_system.gnd ~ gnd
     power_3v3.gnd ~ gnd
@@ -347,7 +394,8 @@ module WirelessLedPcb:
 
     # connect system power supplies
     # power_selector.power_out ~ power_system
-    power_system ~ buck_wide_to_3v3.power_in
+    power_system ~ buck_fuse_in.in
+    buck_fuse_in.out ~ buck_wide_to_3v3.power_in
     power_system ~ ldo_5v.power_in
     buck_wide_to_3v3.power_out ~ power_3v3
     
@@ -379,10 +427,7 @@ module WirelessLedPcb:
 
     # test points
     tp_gnd.tp ~ gnd
-    tp_cell.tp ~ battery_connector.power.vcc
-    tp2_5v_boost.tp ~ boost_3v7_to_5v.power_out.vcc
     tp3_3v3.tp ~ power_3v3.vcc
     tp4_5v_ldo.tp ~ ldo_5v.power_out.vcc
-    tp_detect.tp ~ barrel_jack.detect
     tp_led1_data.tp ~ mcu.io14
     tp_system_power.tp ~ power_system.vcc
