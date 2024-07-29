@@ -1,0 +1,9 @@
+component _0438_period_250WR:
+    # component _0438_period_250WR
+    footprint = "F0603"
+    lcsc_id = "C189641"
+    mpn = "C189641"
+    # pins
+    signal _2 ~ pin 2
+    signal _1 ~ pin 1
+
